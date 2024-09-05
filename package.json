@@ -5,10 +5,10 @@
     "codegen": "graph codegen",
     "build": "graph build",
     "prepare:sepolia": "mustache config/testnet/sepolia.json subgraph.template.yaml > subgraph.yaml",
-    "deploy:sepolia": "yarn prepare:sepolia && yarn codegen && yarn build && graph deploy --node https://api.studio.thegraph.com/deploy/ ido-launchpad-ethereum",
-    "create-local": "graph create --node http://localhost:8020/ ido-launchpad-ethereum",
-    "remove-local": "graph remove --node http://localhost:8020/ ido-launchpad-ethereum",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 ido-launchpad-ethereum",
+    "deploy:sepolia": "yarn prepare:sepolia && yarn codegen && yarn build && graph deploy --node https://api.studio.thegraph.com/deploy/ memetropolis-sepolia",
+    "create-local": "graph create --node http://localhost:8020/ memetropolis-sepolia",
+    "remove-local": "graph remove --node http://localhost:8020/ memetropolis-sepolia",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 memetropolis-sepolia",
     "test": "graph test"
   },
   "dependencies": {
