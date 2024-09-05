@@ -1,0 +1,32 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: IDOLaunchpad
+    network: sepolia
+    source:
+      address: "0xcCE5d7fFA7eB045fa2aFa1E2EDc074DCC791b703"
+      abi: IDOLaunchpad
+      startBlock: 6631193
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - TokensPurchased
+        - TokensClaimed
+        - FeesWithdrawn
+      abis:
+        - name: IDOLaunchpad
+          file: ./abis/IDOLaunchpad.json
+      eventHandlers:
+        - event: TokensPurchased(indexed address,uint256,uint256)
+          handler: handleTokensPurchased
+        - event: TokensClaimed(indexed address,uint256)
+          handler: handleTokensClaimed
+        - event: FeesWithdrawn(indexed address,uint256)
+          handler: handleFeesWithdrawn
+      file: ./src/ido-launchpad.ts

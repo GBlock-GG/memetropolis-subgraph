@@ -1,0 +1,27 @@
+type TokensPurchased @entity(immutable: true) {
+  id: Bytes!
+  buyer: Bytes! # address
+  amount: BigInt! # uint256
+  cost: BigInt! #uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TokensClaimed @entity(immutable: true) {
+  id: Bytes!
+  buyer: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type FeesWithdrawn @entity(immutable: true) {
+  id: Bytes!
+  beneficiary: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
