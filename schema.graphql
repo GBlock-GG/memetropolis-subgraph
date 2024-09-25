@@ -1,27 +1,142 @@
-type TokensPurchased @entity(immutable: true) {
+#############################
+####### Token Metadata ######
+#############################
+
+type Token @entity {
+  " Smart contract address of the token "
   id: Bytes!
-  buyer: Bytes! # address
-  amount: BigInt! # uint256
-  cost: BigInt! #uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+
+  " Name of the token, mirrored from the smart contract "
+  name: String!
+
+  " Symbol of the token, mirrored from the smart contract "
+  symbol: String!
+
+  " The number of decimal places this token uses, default to 18 "
+  decimals: Int!
+
+  " Total number of unique token holders who are currently holding more the token "
+  currentHolderCount: BigInt!
+
+  " Total number of cumulative unique token holders who held or are holding the token "
+  cumulativeHolderCount: BigInt!
+
+  " Total number of token transfer events "
+  transferCount: BigInt!
+
+  " Total number of token mint events "
+  mintCount: BigInt!
+
+  " Total number of token burn events "
+  burnCount: BigInt!
+
+  " Total token supply "
+  totalSupply: BigInt!
+
+  " Total token burned "
+  totalBurned: BigInt!
+
+  " Total token minted "
+  totalMinted: BigInt!
+
+  " Token holder's balance "
+  holdersBalance: [AccountBalance!]! @derivedFrom(field: "token")
 }
 
-type TokensClaimed @entity(immutable: true) {
+##################################
+##### Event-Level Data #####
+##################################
+
+interface Event {
+  " { Token ID }-{ Transaction hash }-{ Log index } "
   id: Bytes!
-  buyer: Bytes! # address
-  amount: BigInt! # uint256
+
+  " Transaction hash of the transaction that emitted this event "
+  hash: String!
+
+  " Event log index. For transactions that don't emit event, create arbitrary index starting from 0 "
+  logIndex: Int!
+
+  " The token this event belongs to "
+  token: Token!
+
+  " Nonce of the transaction that emitted this event "
+  nonce: Int!
+
+  " Address that received the tokens "
+  to: Account!
+
+  " Address that sent the tokens "
+  from: Account!
+
+  " Block number of this event "
   blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+
+  " Timestamp of this event "
+  timestamp: BigInt!
 }
 
-type FeesWithdrawn @entity(immutable: true) {
+type TransferEvent implements Event @entity {
+  " { Token ID }-{ Transaction hash }-{ Log index } "
   id: Bytes!
-  beneficiary: Bytes! # address
-  amount: BigInt! # uint256
+
+  " Transaction hash of the transaction that emitted this event "
+  hash: String!
+
+  " Event log index. For transactions that don't emit event, create arbitrary index starting from 0 "
+  logIndex: Int!
+
+  " The token this event belongs to "
+  token: Token!
+
+  " Nonce of the transaction that emitted this event "
+  nonce: Int!
+
+  " Quantity of tokens transferred "
+  amount: BigInt!
+
+  " Account that received the tokens "
+  to: Account!
+
+  " Account that sent the tokens "
+  from: Account!
+
+  " Block number of this event "
   blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+
+  " Timestamp of this event "
+  timestamp: BigInt!
+}
+
+##################################
+######## Account MetaData ########
+##################################
+
+# An account is a unique Ethereum address
+type Account @entity {
+  " Address of the account "
+  id: Bytes!
+
+  " Token balances that this account holds "
+  balances: [AccountBalance!]! @derivedFrom(field: "account")
+}
+
+type AccountBalance @entity {
+  " { Address Of the Account }-{ Address of the Token }"
+  id: Bytes!
+
+  " Account address "
+  account: Account!
+
+  " Token address "
+  token: Token!
+
+  " Current account balance "
+  amount: BigInt!
+
+  " Block number in which the balance was last modified "
+  blockNumber: BigInt!
+
+  " Timestamp in which the balance was last modified "
+  timestamp: BigInt!
 }

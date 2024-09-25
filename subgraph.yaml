@@ -5,28 +5,53 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: IDOLaunchpad
-    network: sepolia
+    name: TokenFactory
+    network: chapel
     source:
-      address: "0xcCE5d7fFA7eB045fa2aFa1E2EDc074DCC791b703"
-      abi: IDOLaunchpad
-      startBlock: 6631193
+      address: "0x626718A7263FB30006cc1D01cd2919D8bdf58a42"
+      abi: TokenFactory
+      startBlock: 44185854
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - TokensPurchased
-        - TokensClaimed
-        - FeesWithdrawn
+        - Token
+        - TransferEvent
+        - Account
+        - AccountBalance
       abis:
-        - name: IDOLaunchpad
-          file: ./abis/IDOLaunchpad.json
+        - name: TokenFactory
+          file: ./abis/TokenFactory.json
       eventHandlers:
-        - event: TokensPurchased(indexed address,uint256,uint256)
-          handler: handleTokensPurchased
-        - event: TokensClaimed(indexed address,uint256)
-          handler: handleTokensClaimed
-        - event: FeesWithdrawn(indexed address,uint256)
-          handler: handleFeesWithdrawn
-      file: ./src/ido-launchpad.ts
+        - event: CreatedMemeToken(indexed address,indexed address,string,string)
+          handler: handleCreatedMemeToken
+        - event: BoughtMemeToken(indexed address,indexed address,uint256)
+          handler: handleBoughtMemeToken
+        - event: SoldMemeToken(indexed address,indexed address,uint256)
+          handler: handleSoldMemeToken
+        - event: WithdrawnETH(uint256)
+          handler: handleWithdrawnETH
+        - event: WithdrawnToken(address,uint256)
+          handler: handleWithdrawnToken
+      file: ./src/token-factory.ts
+templates:
+  # These data sources templates exist to support the different types that a specific erc20 token could be.
+  - name: StandardToken
+    kind: ethereum/contract
+    network: chapel
+    source:
+      abi: ERC20
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/token.ts
+      entities:
+        - TransferEvent
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer

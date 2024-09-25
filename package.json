@@ -6,9 +6,8 @@
     "build": "graph build",
     "prepare:sepolia": "mustache config/testnet/sepolia.json subgraph.template.yaml > subgraph.yaml",
     "deploy:sepolia": "yarn prepare:sepolia && yarn codegen && yarn build && graph deploy --node https://api.studio.thegraph.com/deploy/ memetropolis-sepolia",
-    "create-local": "graph create --node http://localhost:8020/ memetropolis-sepolia",
-    "remove-local": "graph remove --node http://localhost:8020/ memetropolis-sepolia",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 memetropolis-sepolia",
+    "prepare:bsc-testnet": "mustache config/testnet/bsc-testnet.json subgraph.template.yaml > subgraph.yaml",
+    "deploy:bsc-testnet": "yarn prepare:bsc-testnet && yarn codegen && yarn build && graph deploy --version-label v0.0.1 --studio memetropolis-bsc-testnet",
     "test": "graph test"
   },
   "dependencies": {
