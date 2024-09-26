@@ -39,6 +39,9 @@ type Token @entity {
   " Total token minted "
   totalMinted: BigInt!
 
+  " Created timestamp "
+  timestamp: BigInt!
+
   " Token holder's balance "
   holdersBalance: [AccountBalance!]! @derivedFrom(field: "token")
 }

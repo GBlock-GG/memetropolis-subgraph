@@ -29,6 +29,7 @@ export function handleCreatedMemeToken(event: CreatedMemeToken): void {
     token.totalSupply = BIGINT_ZERO;
     token.totalBurned = BIGINT_ZERO;
     token.totalMinted = BIGINT_ZERO;
+    token.timestamp = event.block.timestamp;
 
     log.debug("Adding token to registry, symbol: {}, address: {}", [
       token.symbol,
