@@ -44,6 +44,9 @@ type Token @entity {
 
   " Token holder's balance "
   holdersBalance: [AccountBalance!]! @derivedFrom(field: "token")
+
+  " Purchase history of this token "
+  purchaseHistory: [PurchaseHistory!]! @derivedFrom(field: "token")
 }
 
 ##################################
@@ -122,6 +125,9 @@ type Account @entity {
 
   " Token balances that this account holds "
   balances: [AccountBalance!]! @derivedFrom(field: "account")
+
+  " Purchase history of this account "
+  purchaseHistory: [PurchaseHistory!]! @derivedFrom(field: "account")
 }
 
 type AccountBalance @entity {
@@ -141,5 +147,34 @@ type AccountBalance @entity {
   blockNumber: BigInt!
 
   " Timestamp in which the balance was last modified "
+  timestamp: BigInt!
+}
+
+type PurchaseHistory @entity {
+  " { Address Of the Account }-{ Address of the Token }"
+  id: Bytes!
+
+  " Token address "
+  token: Token!
+
+  " Account address "
+  account: Account!
+
+  " Quantity of tokens purchased "
+  amount: BigInt!
+
+  " Type of Purchase "
+  type: String!
+
+  " Eid "
+  eid: BigInt!
+
+  " Transaction hash of the transaction that emitted this event "
+  hash: String!
+
+  " Event log index. For transactions that don't emit event, create arbitrary index starting from 0 "
+  blockNumber: BigInt!
+
+  " Timestamp of this event "
   timestamp: BigInt!
 }

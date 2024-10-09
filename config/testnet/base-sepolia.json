@@ -1,0 +1,5 @@
+{
+  "network": "base-sepolia",
+  "TokenFactory": "0x30396c04027c94a1BEA6c16DCa0A93450344D4a8",
+  "TokenFactoryStartBlock": "16360205"
+}

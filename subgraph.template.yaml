@@ -28,12 +28,12 @@ dataSources:
           handler: handleCreatedMemeToken
         - event: BoughtMemeToken(indexed address,indexed address,uint256)
           handler: handleBoughtMemeToken
+        - event: BoughtCrosschainMemeToken(indexed uint32,indexed address,indexed address,uint256)
+          handler: handleBoughtCrosschainMemeToken
         - event: SoldMemeToken(indexed address,indexed address,uint256)
           handler: handleSoldMemeToken
-        - event: WithdrawnETH(uint256)
-          handler: handleWithdrawnETH
-        - event: WithdrawnToken(address,uint256)
-          handler: handleWithdrawnToken
+        - event: SoldCrosschainMemeToken(indexed uint32,indexed address,indexed address,uint256)
+          handler: handleSoldCrosschainMemeToken
       file: ./src/token-factory.ts
 templates:
   # These data sources templates exist to support the different types that a specific erc20 token could be.
