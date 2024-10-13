@@ -169,6 +169,9 @@ type PurchaseHistory @entity {
   " Eid "
   eid: BigInt!
 
+  " Token Price "
+  price: BigInt!
+
   " Transaction hash of the transaction that emitted this event "
   hash: String!
 

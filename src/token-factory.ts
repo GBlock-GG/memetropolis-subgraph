@@ -1,15 +1,16 @@
 import { BigInt, Bytes, log } from "@graphprotocol/graph-ts";
 import {
-  CreatedMemeToken,
+  BoughtCrosschainMemeToken,
   BoughtMemeToken,
-  SoldMemeToken, BoughtCrosschainMemeToken, SoldCrosschainMemeToken,
+  CreatedMemeToken,
+  SoldCrosschainMemeToken,
+  SoldMemeToken,
+  TokenFactory,
 } from "../generated/TokenFactory/TokenFactory";
 import { PurchaseHistory, Token } from "../generated/schema";
 import { BIGINT_ZERO, DEFAULT_DECIMALS } from "./common/constants";
-import {
-StandardToken,
-} from "../generated/templates";
-  
+import { StandardToken, } from "../generated/templates";
+
 export function handleCreatedMemeToken(event: CreatedMemeToken): void {
   // Persist token data if it didn't exist
   let token = Token.load(Bytes.fromHexString(event.params.tokenAddress.toHex()));
@@ -50,6 +51,8 @@ export function handleBoughtMemeToken(event: BoughtMemeToken): void {
         Bytes.fromHexString(event.transaction.hash.toHex()).concatI32(event.logIndex.toI32())
       )
 
+      const tokenFactory = TokenFactory.bind(event.address);
+      purchaseHistory.price = tokenFactory.getCurrentTokenPrice(event.params.memeTokenAddress)
       purchaseHistory.token = token.id
       purchaseHistory.account = event.params.user
       purchaseHistory.amount = event.params.tokenQty
@@ -69,6 +72,8 @@ export function handleSoldMemeToken(event: SoldMemeToken): void {
       Bytes.fromHexString(event.transaction.hash.toHex()).concatI32(event.logIndex.toI32())
     )
 
+    const tokenFactory = TokenFactory.bind(event.address);
+    purchaseHistory.price = tokenFactory.getCurrentTokenPrice(event.params.memeTokenAddress)
     purchaseHistory.token = token.id
     purchaseHistory.account = event.params.user
     purchaseHistory.amount = event.params.tokenQty
@@ -88,6 +93,8 @@ export function handleBoughtCrosschainMemeToken(event: BoughtCrosschainMemeToken
       Bytes.fromHexString(event.transaction.hash.toHex()).concatI32(event.logIndex.toI32())
     )
 
+    const tokenFactory = TokenFactory.bind(event.address);
+    purchaseHistory.price = tokenFactory.getCurrentTokenPrice(event.params.memeTokenAddress)
     purchaseHistory.token = token.id
     purchaseHistory.account = event.params.user
     purchaseHistory.amount = event.params.tokenQty
@@ -107,6 +114,8 @@ export function handleSoldCrosschainMemeToken(event: SoldCrosschainMemeToken): v
       Bytes.fromHexString(event.transaction.hash.toHex()).concatI32(event.logIndex.toI32())
     )
 
+    const tokenFactory = TokenFactory.bind(event.address);
+    purchaseHistory.price = tokenFactory.getCurrentTokenPrice(event.params.memeTokenAddress)
     purchaseHistory.token = token.id
     purchaseHistory.account = event.params.user
     purchaseHistory.amount = event.params.tokenQty
