@@ -26,13 +26,13 @@ dataSources:
       eventHandlers:
         - event: CreatedMemeToken(indexed address,indexed address,string,string)
           handler: handleCreatedMemeToken
-        - event: BoughtMemeToken(indexed address,indexed address,uint256)
+        - event: BoughtMemeToken(indexed address,indexed address,uint256,uint256)
           handler: handleBoughtMemeToken
-        - event: BoughtCrosschainMemeToken(indexed uint32,indexed address,indexed address,uint256)
+        - event: BoughtCrosschainMemeToken(indexed uint32,indexed address,indexed address,uint256,uint256)
           handler: handleBoughtCrosschainMemeToken
-        - event: SoldMemeToken(indexed address,indexed address,uint256)
+        - event: SoldMemeToken(indexed address,indexed address,uint256,uint256)
           handler: handleSoldMemeToken
-        - event: SoldCrosschainMemeToken(indexed uint32,indexed address,indexed address,uint256)
+        - event: SoldCrosschainMemeToken(indexed uint32,indexed address,indexed address,uint256,uint256)
           handler: handleSoldCrosschainMemeToken
       file: ./src/token-factory.ts
 templates:

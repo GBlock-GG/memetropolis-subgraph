@@ -53,6 +53,7 @@ export function handleBoughtMemeToken(event: BoughtMemeToken): void {
 
       const tokenFactory = TokenFactory.bind(event.address);
       purchaseHistory.price = tokenFactory.getCurrentTokenPrice(event.params.memeTokenAddress)
+      purchaseHistory.ethAmount = event.params.ethAmount
       purchaseHistory.token = token.id
       purchaseHistory.account = event.params.user
       purchaseHistory.amount = event.params.tokenQty
@@ -74,6 +75,7 @@ export function handleSoldMemeToken(event: SoldMemeToken): void {
 
     const tokenFactory = TokenFactory.bind(event.address);
     purchaseHistory.price = tokenFactory.getCurrentTokenPrice(event.params.memeTokenAddress)
+    purchaseHistory.ethAmount = event.params.ethAmount
     purchaseHistory.token = token.id
     purchaseHistory.account = event.params.user
     purchaseHistory.amount = event.params.tokenQty
@@ -95,6 +97,7 @@ export function handleBoughtCrosschainMemeToken(event: BoughtCrosschainMemeToken
 
     const tokenFactory = TokenFactory.bind(event.address);
     purchaseHistory.price = tokenFactory.getCurrentTokenPrice(event.params.memeTokenAddress)
+    purchaseHistory.ethAmount = event.params.ethAmount
     purchaseHistory.token = token.id
     purchaseHistory.account = event.params.user
     purchaseHistory.amount = event.params.tokenQty
@@ -116,6 +119,7 @@ export function handleSoldCrosschainMemeToken(event: SoldCrosschainMemeToken): v
 
     const tokenFactory = TokenFactory.bind(event.address);
     purchaseHistory.price = tokenFactory.getCurrentTokenPrice(event.params.memeTokenAddress)
+    purchaseHistory.ethAmount = event.params.ethAmount
     purchaseHistory.token = token.id
     purchaseHistory.account = event.params.user
     purchaseHistory.amount = event.params.tokenQty
