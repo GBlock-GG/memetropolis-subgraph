@@ -17,6 +17,7 @@ export function handleCreatedMemeToken(event: CreatedMemeToken): void {
   if (token == null) {
     token = new Token(Bytes.fromHexString(event.params.tokenAddress.toHex()));
     token.name = event.params.name;
+    token.owner = event.params.creator;
     token.symbol = event.params.symbol;
     token.decimals = DEFAULT_DECIMALS;
 

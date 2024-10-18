@@ -6,6 +6,9 @@ type Token @entity {
   " Smart contract address of the token "
   id: Bytes!
 
+  " Owner of the token "
+  owner: Bytes!
+
   " Name of the token, mirrored from the smart contract "
   name: String!
 
