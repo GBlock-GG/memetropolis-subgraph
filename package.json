@@ -7,9 +7,9 @@
     "prepare:sepolia": "mustache config/testnet/sepolia.json subgraph.template.yaml > subgraph.yaml",
     "deploy:sepolia": "yarn prepare:sepolia && yarn codegen && yarn build && graph deploy --node https://api.studio.thegraph.com/deploy/ memetropolis-sepolia",
     "prepare:bsc-testnet": "mustache config/testnet/bsc-testnet.json subgraph.template.yaml > subgraph.yaml",
-    "deploy:bsc-testnet": "yarn prepare:bsc-testnet && yarn codegen && yarn build && graph deploy --version-label v0.0.7 --studio memetropolis-bsc-testnet",
+    "deploy:bsc-testnet": "yarn prepare:bsc-testnet && yarn codegen && yarn build && graph deploy --version-label v0.0.8 --studio memetropolis-bsc-testnet",
     "prepare:base-sepolia": "mustache config/testnet/base-sepolia.json subgraph.template.yaml > subgraph.yaml",
-    "deploy:base-sepolia": "yarn prepare:base-sepolia && yarn codegen && yarn build && graph deploy --version-label v0.0.7 --studio memetropolis-base-sepolia"
+    "deploy:base-sepolia": "yarn prepare:base-sepolia && yarn codegen && yarn build && graph deploy --version-label v0.0.8 --studio memetropolis-base-sepolia"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.68.5",

@@ -15,6 +15,12 @@ type Token @entity {
   " Symbol of the token, mirrored from the smart contract "
   symbol: String!
 
+  " Image of the token, mirrored from the smart contract "
+  image: String!
+
+  " Description of the token, mirrored from the smart contract "
+  description: String!
+
   " The number of decimal places this token uses, default to 18 "
   decimals: Int!
 

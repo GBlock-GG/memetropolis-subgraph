@@ -15,7 +15,11 @@ export function handleCreatedMemeToken(event: CreatedMemeToken): void {
   // Persist token data if it didn't exist
   let token = Token.load(Bytes.fromHexString(event.params.tokenAddress.toHex()));
   if (token == null) {
+    const tokenFactory = TokenFactory.bind(event.address);
     token = new Token(Bytes.fromHexString(event.params.tokenAddress.toHex()));
+    const tokenInfo = tokenFactory.addressToMemeTokenMapping(event.params.tokenAddress);
+    token.image = tokenInfo.getTokenImageUrl();
+    token.description = tokenInfo.getDescription();
     token.name = event.params.name;
     token.owner = event.params.creator;
     token.symbol = event.params.symbol;
