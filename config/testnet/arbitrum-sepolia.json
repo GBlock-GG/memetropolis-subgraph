@@ -1,0 +1,5 @@
+{
+  "network": "arbitrum-sepolia",
+  "TokenFactory": "0x16c19a9643b9f1dab1adb7543499e4976a3dd6c3",
+  "TokenFactoryStartBlock": "97006743"
+}
