@@ -51,6 +51,30 @@ type Token @entity {
   " Created timestamp "
   timestamp: BigInt!
 
+  " K "
+  k: BigInt!
+
+  " Initial Price "
+  initialPrice: BigInt!
+
+  " Max Supply "
+  maxSupply: BigInt!
+
+  " Sales Ratio "
+  salesRatio: BigInt!
+
+  " Reserved Ratio "
+  reservedRatio: BigInt!
+
+  " Liquidity Pool Ratio "
+  liquidityPoolRatio: BigInt!
+
+  " Launch Date "
+  launchDate: BigInt!
+
+  " Maximum Per User "
+  maximumPerUser: BigInt!
+
   " Token holder's balance "
   holdersBalance: [AccountBalance!]! @derivedFrom(field: "token")
 

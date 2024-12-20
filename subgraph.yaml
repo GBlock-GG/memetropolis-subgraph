@@ -8,9 +8,9 @@ dataSources:
     name: TokenFactory
     network: arbitrum-sepolia
     source:
-      address: "0x16c19a9643b9f1dab1adb7543499e4976a3dd6c3"
+      address: "0xd48570c834e2afcd1fd5c77d89a47907bdd37133"
       abi: TokenFactory
-      startBlock: 97006743
+      startBlock: 108655285
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

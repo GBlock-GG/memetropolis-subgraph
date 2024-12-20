@@ -25,6 +25,16 @@
         "internalType": "uint256",
         "name": "initialPrice",
         "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_uniswapV2Factory",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_uniswapV2Router",
+        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
@@ -69,6 +79,11 @@
   },
   {
     "inputs": [],
+    "name": "IncorrectAddress",
+    "type": "error"
+  },
+  {
+    "inputs": [],
     "name": "IncorrectETHSent",
     "type": "error"
   },
@@ -91,6 +106,11 @@
       }
     ],
     "name": "InvalidOptionType",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidTokenCreation",
     "type": "error"
   },
   {
@@ -213,7 +233,17 @@
   },
   {
     "inputs": [],
+    "name": "TokenNotLaunched",
+    "type": "error"
+  },
+  {
+    "inputs": [],
     "name": "TokenNotListed",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "UserBuyLimitExceeded",
     "type": "error"
   },
   {
@@ -422,58 +452,6 @@
     "type": "event"
   },
   {
-    "inputs": [],
-    "name": "INITIAL_PRICE",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "K",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "UNISWAP_V2_FACTORY_ADDRESS",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "UNISWAP_V2_ROUTER_ADDRESS",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",
@@ -522,6 +500,53 @@
         "internalType": "address",
         "name": "creatorAddress",
         "type": "address"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "k",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "initialPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxSupply",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "salesRatio",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "reservedRatio",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "liquidityPoolRatio",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "launchDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maximumPerUser",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct TokenFactory.AdvancedInfo",
+        "name": "advancedInfo",
+        "type": "tuple"
       }
     ],
     "stateMutability": "view",
@@ -571,9 +596,14 @@
         "type": "uint32"
       },
       {
-        "internalType": "address",
+        "internalType": "bytes32",
         "name": "memeTokenAddress",
-        "type": "address"
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "recipientAddress",
+        "type": "bytes32"
       },
       {
         "internalType": "uint128",
@@ -643,6 +673,46 @@
         "internalType": "string",
         "name": "description",
         "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "k",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "initialPrice",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "maxSupply",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "salesRatio",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "reservedRatio",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "liquidityPoolRatio",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "launchDate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "maximumPerUser",
+        "type": "uint256"
       }
     ],
     "name": "createMemeToken",
@@ -938,9 +1008,14 @@
         "type": "uint32"
       },
       {
-        "internalType": "address",
+        "internalType": "bytes32",
         "name": "memeTokenAddress",
-        "type": "address"
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "recipientAddress",
+        "type": "bytes32"
       },
       {
         "internalType": "uint128",
@@ -972,9 +1047,14 @@
         "type": "uint32"
       },
       {
-        "internalType": "address",
+        "internalType": "bytes32",
         "name": "memeTokenAddress",
-        "type": "address"
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "recipientAddress",
+        "type": "bytes32"
       },
       {
         "internalType": "uint256",
@@ -1013,9 +1093,14 @@
         "type": "uint32"
       },
       {
-        "internalType": "address",
+        "internalType": "bytes32",
         "name": "memeTokenAddress",
-        "type": "address"
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "recipientAddress",
+        "type": "bytes32"
       },
       {
         "internalType": "uint256",
@@ -1095,9 +1180,5 @@
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
-  },
-  {
-    "stateMutability": "payable",
-    "type": "receive"
   }
 ]
