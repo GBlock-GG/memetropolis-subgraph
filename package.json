@@ -17,7 +17,9 @@
     "prepare:base-mainnet": "mustache config/mainnet/base-mainnet.json subgraph.template.yaml > subgraph.yaml",
     "deploy:base-mainnet": "yarn prepare:base-mainnet && yarn codegen && yarn build && graph deploy --version-label v0.0.1 --studio memetropolis-base-mainnet",
     "prepare:arbitrum-mainnet": "mustache config/mainnet/arbitrum-mainnet.json subgraph.template.yaml > subgraph.yaml",
-    "deploy:arbitrum-mainnet": "yarn prepare:arbitrum-mainnet && yarn codegen && yarn build && graph deploy --version-label v0.0.1 --studio memetropolis-arb-mainnet"
+    "deploy:arbitrum-mainnet": "yarn prepare:arbitrum-mainnet && yarn codegen && yarn build && graph deploy --version-label v0.0.1 --studio memetropolis-arb-mainnet",
+    "prepare:eth-mainnet": "mustache config/mainnet/eth-mainnet.json subgraph.template.yaml > subgraph.yaml",
+    "deploy:eth-mainnet": "yarn prepare:eth-mainnet && yarn codegen && yarn build && graph deploy --version-label v0.0.1 --studio memetropolis-eth-mainnet"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.68.5",

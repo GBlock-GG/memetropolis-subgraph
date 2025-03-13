@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: TokenFactory
-    network: arbitrum-one
+    network: mainnet
     source:
-      address: "0x16C19A9643b9F1Dab1adb7543499E4976a3DD6c3"
+      address: "0xE1164a7a364929C3ba3Da9671c8003DD71975D2d"
       abi: TokenFactory
-      startBlock: 313233907
+      startBlock: 22039000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -39,7 +39,7 @@ templates:
   # These data sources templates exist to support the different types that a specific erc20 token could be.
   - name: StandardToken
     kind: ethereum/contract
-    network: arbitrum-one
+    network: mainnet
     source:
       abi: ERC20
     mapping:
