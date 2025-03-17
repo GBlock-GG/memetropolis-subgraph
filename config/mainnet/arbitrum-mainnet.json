@@ -1,0 +1,5 @@
+{
+  "network": "arbitrum-one",
+  "TokenFactory": "0x16C19A9643b9F1Dab1adb7543499E4976a3DD6c3",
+  "TokenFactoryStartBlock": "313233907"
+}

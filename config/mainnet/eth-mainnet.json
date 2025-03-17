@@ -1,0 +1,5 @@
+{
+  "network": "mainnet",
+  "TokenFactory": "0xE1164a7a364929C3ba3Da9671c8003DD71975D2d",
+  "TokenFactoryStartBlock": "22039000"
+}
