@@ -18,12 +18,21 @@ export function handleCreatedMemeToken(event: CreatedMemeToken): void {
     const tokenFactory = TokenFactory.bind(event.address);
     token = new Token(Bytes.fromHexString(event.params.tokenAddress.toHex()));
     const tokenInfo = tokenFactory.addressToMemeTokenMapping(event.params.tokenAddress);
-    token.image = tokenInfo.getTokenImageUrl();
-    token.description = tokenInfo.getDescription();
     token.name = event.params.name;
-    token.owner = event.params.creator;
     token.symbol = event.params.symbol;
+    token.description = tokenInfo.getDescription();
+    token.image = tokenInfo.getTokenImageUrl();
+    token.owner = tokenInfo.getCreatorAddress();
     token.decimals = DEFAULT_DECIMALS;
+
+    token.k = tokenInfo.getAdvancedInfo().k;
+    token.initialPrice = tokenInfo.getAdvancedInfo().initialPrice;
+    token.maxSupply = tokenInfo.getAdvancedInfo().maxSupply;
+    token.salesRatio = tokenInfo.getAdvancedInfo().salesRatio;
+    token.reservedRatio = tokenInfo.getAdvancedInfo().reservedRatio;
+    token.liquidityPoolRatio = tokenInfo.getAdvancedInfo().liquidityPoolRatio;
+    token.launchDate = tokenInfo.getAdvancedInfo().launchDate;
+    token.maximumPerUser = tokenInfo.getAdvancedInfo().maximumPerUser;
 
     token.currentHolderCount = BIGINT_ZERO;
     token.cumulativeHolderCount = BIGINT_ZERO;
